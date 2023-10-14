@@ -4,7 +4,7 @@ const btnStart = document.getElementById("btn-start");
 const sizes = {
     boardWidth: 35,
     boardHeight: 20,
-    cellSize: 28
+    blockSize: 28
 };
 
 const game = {
@@ -12,21 +12,21 @@ const game = {
     speed: 50
 };
 
-board.style.width = `${(sizes.cellSize + 2) * sizes.boardWidth}px`;
-board.style.height = `${(sizes.cellSize + 2) * sizes.boardHeight}px`;
+board.style.width = `${(sizes.blockSize + 2) * sizes.boardWidth}px`;
+board.style.height = `${(sizes.blockSize + 2) * sizes.boardHeight}px`;
 
 for (let i = 0; i < sizes.boardHeight; i++) {
     for (let j = 0; j < sizes.boardWidth; j++) {
-        const cell = document.createElement("div");
+        const block = document.createElement("div");
 
-        cell.className = "block";
-        cell.dataset["i"] = i;
-        cell.dataset["j"] = j;
-        cell.addEventListener("click", e => {
+        block.className = "block";
+        block.dataset["i"] = i;
+        block.dataset["j"] = j;
+        block.addEventListener("click", e => {
             e.target.classList.toggle("live");
         });
 
-        board.appendChild(cell);
+        board.appendChild(block);
     }
 }
 
