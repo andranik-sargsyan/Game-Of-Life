@@ -45,28 +45,22 @@ function loop() {
         const j = +block.dataset["j"];
 
         const query = `
-            [data-i='${i - 1}'][data-j='${j - 1}'],
-            [data-i='${i - 1}'][data-j='${j}'],
-            [data-i='${i - 1}'][data-j='${j + 1}'],
-            [data-i='${i}'][data-j='${j - 1}'],
-            [data-i='${i}'][data-j='${j + 1}'],
-            [data-i='${i + 1}'][data-j='${j - 1}'],
-            [data-i='${i + 1}'][data-j='${j}'],
-            [data-i='${i + 1}'][data-j='${j + 1}']
+            .live[data-i='${i - 1}'][data-j='${j - 1}'],
+            .live[data-i='${i - 1}'][data-j='${j}'],
+            .live[data-i='${i - 1}'][data-j='${j + 1}'],
+            .live[data-i='${i}'][data-j='${j - 1}'],
+            .live[data-i='${i}'][data-j='${j + 1}'],
+            .live[data-i='${i + 1}'][data-j='${j - 1}'],
+            .live[data-i='${i + 1}'][data-j='${j}'],
+            .live[data-i='${i + 1}'][data-j='${j + 1}']
         `;
 
-        const neighbors = Array.from(document.querySelectorAll(query));
-        const liveNeighborCount = neighbors.filter(n => n.classList.contains("live")).length;
+        const liveNeighborCount = document.querySelectorAll(query).length;
+        const isBlockLive = block.classList.contains("live");
 
-        if (block.classList.contains("live")) {
-            if (liveNeighborCount < 2 || liveNeighborCount > 3) {
-                block.classList.add("toggle");
-            }
-        }
-        else {
-            if (liveNeighborCount == 3) {
-                block.classList.add("toggle");
-            }
+        if (isBlockLive && (liveNeighborCount < 2 || liveNeighborCount > 3) ||
+            !isBlockLive && liveNeighborCount == 3) {
+            block.classList.add("toggle");
         }
     }
 
